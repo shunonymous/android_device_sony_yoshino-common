@@ -3,7 +3,6 @@
 # Ignore attempts to read unused OnePlus props due to kanged libqmi_cci.so
 dontaudit {
   adpl
-  atfwd
   cnd
   hal_bluetooth_qti
   hal_dpmQmiMgr
