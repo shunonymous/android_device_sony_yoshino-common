@@ -15,6 +15,8 @@
 
 PLATFORM_PATH := device/sony/yoshino-common
 
+AB_OTA_UPDATER := false
+
 ### PROPRIETARY VENDOR FILES
 include vendor/sony/yoshino-common/BoardConfigVendor.mk
 
