@@ -34,6 +34,10 @@ PRODUCT_PACKAGES += \
     fs_config_files \
     fs_config_dirs
 
+# Fastbootd
+PRODUCT_PACKAGES += \
+    fastbootd
+
 # Enable dynamic partition size
 PRODUCT_USE_DYNAMIC_PARTITION_SIZE := true
 
