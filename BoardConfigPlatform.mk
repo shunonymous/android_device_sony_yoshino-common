@@ -31,21 +31,19 @@ TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := cortex-a73
+TARGET_CPU_VARIANT := cortex-a73
 
 TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := generic
-TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
+TARGET_2ND_CPU_VARIANT := cortex-a73
 
 ### KERNEL
 TARGET_KERNEL_SOURCE  := kernel/sony/msm8998
 TARGET_KERNEL_VERSION := 4.4
 
-# Taken from unpacked stock boot.img / README_Xperia in Kernel source
+# Taken from unpacked stock boot.img
 BOARD_KERNEL_CMDLINE += ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += sched_enable_hmp=0
@@ -55,8 +53,8 @@ BOARD_KERNEL_CMDLINE += swiotlb=2048
 BOARD_KERNEL_CMDLINE += androidboot.configfs=true
 BOARD_KERNEL_CMDLINE += androidboot.usbcontroller=a800000.dwc3
 BOARD_KERNEL_CMDLINE += loop.max_part=7
+BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
 
-# See README_Xperia in Kernel Source
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
 
@@ -78,15 +76,6 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE    := squashfs
 BOARD_VENDORIMAGE_JOURNAL_SIZE        := 0
 BOARD_VENDORIMAGE_SQUASHFS_COMPRESSOR := lz4
 TARGET_COPY_OUT_VENDOR := vendor
-
-### DEXPREOPT
-# Enable dexpreopt for everything to speed boot time
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := false
-      WITH_DEXPREOPT := true
-  endif
-endif
 
 ### BUILD_COPY_HEADERS ALLOWED
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
@@ -116,15 +105,20 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE :=\
     hardware/qcom-caf/common/vendor_framework_compatibility_matrix_legacy.xml \
     vendor/lineage/config/device_framework_matrix.xml
 BOARD_VNDK_VERSION := current
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
+    $(PLATFORM_PATH)/device_framework_matrix.xml \
+    hardware/qcom-caf/common/vendor_framework_compatibility_matrix.xml \
+    hardware/qcom-caf/common/vendor_framework_compatibility_matrix_legacy.xml \
+    vendor/lineage/config/device_framework_matrix.xml
 ifneq ($(filter poplar_dsds maple_dsds, $(TARGET_DEVICE)),)
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest_dsds.xml
 else
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
 endif
+DEVICE_MATRIX_FILE := hardware/qcom-caf/common/compatibility_matrix.xml
 
 ### PROPS
 TARGET_ODM_PROP += $(PLATFORM_PATH)/odm.prop
-# This is a reset, add more in devices if needed
 TARGET_SYSTEM_PROP := $(PLATFORM_PATH)/system.prop
 TARGET_VENDOR_PROP := $(PLATFORM_PATH)/vendor.prop
 
@@ -138,7 +132,6 @@ endif
 ### RIL
 ENABLE_VENDOR_RIL_SERVICE := true
 TARGET_PER_MGR_ENABLED := true
-TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 ### SEPOLICY
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
@@ -165,3 +158,6 @@ HOSTAPD_VERSION := VER_0_8_X
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+### A/B
+AB_OTA_UPDATER := false

@@ -20,7 +20,8 @@ PRODUCT_PACKAGES += \
 
 # BLUETOOTH
 PRODUCT_PACKAGES += \
-    audio.bluetooth.default
+    audio.bluetooth.default \
+    libldacBT_bco.vendor
 
 ### CARRIERCONFIG
 PRODUCT_PACKAGES += \
@@ -55,8 +56,6 @@ PRODUCT_PACKAGES += \
 ### NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-    NfcNci \
-    SecureElement \
     Tag
 
 ### OPENCUSTOMIZATIONSELECTOR
@@ -69,15 +68,17 @@ PRODUCT_PACKAGES += \
 
 ### SENSORS
 PRODUCT_PACKAGES += \
-    libsensorndkbridge
+    libsensorndkbridge \
+    libpower.vendor
 
 ### SERVICES
 # AUDIO
 PRODUCT_PACKAGES += \
     android.hardware.audio@6.0-impl:32 \
-    android.hardware.audio@2.0-service \
+    android.hardware.audio.service \
     android.hardware.audio.effect@6.0-impl:32 \
-    android.hardware.soundtrigger@2.2-impl:32
+    android.hardware.soundtrigger@2.2-impl:32 \
+    libaudioroute.vendor
 
 # BLUETOOTH
 PRODUCT_PACKAGES += \
@@ -102,13 +103,14 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.1.vendor \
+    android.hardware.drm@1.3.vendor \
     android.hardware.drm-service.clearkey
 
 # FINGERPRINT
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1 \
-    android.hardware.biometrics.fingerprint@2.1.vendor
+    android.hardware.biometrics.fingerprint@2.1.vendor \
+    libhidlbase-v32.vendor
 
 # GATEKEEPER
 PRODUCT_PACKAGES += \
@@ -186,8 +188,6 @@ PRODUCT_PACKAGES += \
 
 # USB
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0 \
-    android.hardware.usb@1.1 \
     android.hardware.usb@1.3-service.dual_role_usb
 
 # VIBRATOR

@@ -16,8 +16,13 @@
 
 PLATFORM_PATH := device/sony/yoshino-common
 
+$(call inherit-product, $(SRC_TARGET_DIR)/product/non_ab_device.mk)
+
 ### PROPRIETARY VENDOR FILES
 $(call inherit-product, vendor/sony/yoshino-common/yoshino-common-vendor.mk)
+
+# Camera
+$(call inherit-product-if-exists, vendor/sony/camera/sony-camera.mk)
 
 PRODUCT_SOONG_NAMESPACES += \
     $(PLATFORM_PATH) \
@@ -31,7 +36,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 
 # For android_filesystem_config.h permissions
 PRODUCT_PACKAGES += \
-    fs_config_files \
     fs_config_dirs
 
 # Fastbootd
@@ -51,6 +55,10 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 ### Additional native libraries
 PRODUCT_COPY_FILES += \
     $(PLATFORM_PATH)/config/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
+
+# extra build signature private vendor
+-include vendor/lineage-priv/keys/keys.mk
+-include vendor/evolution-priv/keys/keys.mk
 
 ### POWER
 TARGET_USE_CUSTOM_POWERHINT ?= false
