@@ -15,8 +15,7 @@
 ### AUDIO
 PRODUCT_PACKAGES += \
     audio.r_submix.default \
-    audio.usb.default \
-    libvolumelistener
+    audio.usb.default
 
 # BLUETOOTH
 PRODUCT_PACKAGES += \
