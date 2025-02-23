@@ -60,16 +60,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librmnetctl
 
-### OMX
-PRODUCT_PACKAGES += \
-    libOmxCore \
-    libOmxVdec \
-    libOmxVenc \
-    libc2dcolorconvert \
-    libmm-omxcore \
-    libstagefrighthw \
-    libstagefright_softomx_plugin.vendor
-
 # PROTOBUF
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full-vendorcompat \
